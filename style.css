@@ -215,7 +215,7 @@ letter-spacing: 0px;
 .text{
   margin-left: 24px;
   margin-top: 15px;
-  
+  word-break: break-all;
  
 }
 .user-img{
