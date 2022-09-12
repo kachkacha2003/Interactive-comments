@@ -317,7 +317,7 @@ let myComent = function () {
   let comentUser = `<div class="user">
   <img class="user-img" src="./images/avatars/image-juliusomo.png" />
   <textarea onchange="changeFunction(event)" placeholder="Add a comment…"></textarea>
-  <button onclick="clickFunction()">SEND</button>
+  <button  onclick="clickFunction(event)">SEND</button>
 </div>`;
   return comentUser;
 };
@@ -334,7 +334,7 @@ console.log(user.children[2])
 
 
 window.clickFunction=()=>{
- 
+ console.log(user.children[1].value)
   if(user.children[1].value!==""){
 
    
@@ -346,7 +346,7 @@ window.clickFunction=()=>{
    let commentByUser=document.querySelectorAll(".commentByUser");
 
    commentByUser[commentByUser.length-1].textContent=user.children[1].value;
-
+   user.children[1].value=""
    
   
    
