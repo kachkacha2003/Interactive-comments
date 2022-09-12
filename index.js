@@ -316,8 +316,8 @@ let userComment=function(){
 let myComent = function () {
   let comentUser = `<div class="user">
   <img class="user-img" src="./images/avatars/image-juliusomo.png" />
-  <textarea placeholder="Add a comment…"></textarea>
-  <button>SEND</button>
+  <textarea onchange="changeFunction(event)" placeholder="Add a comment…"></textarea>
+  <button onclick="clickFunction()">SEND</button>
 </div>`;
   return comentUser;
 };
@@ -331,11 +331,15 @@ let user=document.querySelector(".user");
 console.log(user)
 let replyBtn = document.querySelectorAll(".reply");
 console.log(user.children[2])
-user.children[2].addEventListener("click",()=>{
+
+
+window.clickFunction=()=>{
  
   if(user.children[1].value!==""){
-   console.log(textArea.value)
-   container.insertAdjacentHTML('beforeend', userComment());
+
+   
+   container.innerHTML+=userComment()
+   //container.insertAdjacentHTML('beforeend', userComment());
    
    container.insertBefore(container.lastElementChild,container.lastElementChild.previousElementSibling)
    
@@ -343,7 +347,7 @@ user.children[2].addEventListener("click",()=>{
 
    commentByUser[commentByUser.length-1].textContent=user.children[1].value;
 
-   user.children[1].value=""
+   
   
    
   
@@ -355,7 +359,12 @@ user.children[2].addEventListener("click",()=>{
   
     
   }
-})
+}
+window.changeFunction=(event)=>{
+  console.log(event.target.value);
+  user.children[1].value=event.target.value;
+}
+
 
 
 /*for(let z=0;z<comments[i].replies.length;z++)
