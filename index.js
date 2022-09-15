@@ -204,9 +204,14 @@ let myComment=function(){
             <p class="comment">
               ${comments[1].replies[1].content}
             </p>
+            <textarea class="smallForUpdate"  placeholder="Add a comment…"></textarea>
           </div>
+         
         </div>
         <div class="reply1">
+        <div class="none">
+        <button>UPDATE</button>
+            </div>
         <div class="delete-svg">
         <svg class="delete" width="12" height="14" xmlns="http://www.w3.org/2000/svg"><path d="M1.167 12.448c0 .854.7 1.552 1.555 1.552h6.222c.856 0 1.556-.698 1.556-1.552V3.5H1.167v8.948Zm10.5-11.281H8.75L7.773 0h-3.88l-.976 1.167H0v1.166h11.667V1.167Z" fill="#ED6368"/></svg>
         <h4 class="deleteText">Delete</h4>
@@ -256,6 +261,7 @@ let myComment=function(){
   }
   
 }
+
 let userComment=function(){
   let jonasComment=`
   <div class="box">
@@ -291,7 +297,7 @@ let userComment=function(){
         <div class="info">
           <img class="img" src=${comments[1].replies[1].user.image.png} />
           <h3 class="username">${comments[1].replies[1].user.username}</h3>
-         
+         <div class="you">YOU</div>
           <p class="month">Just now</p>
         </div>
       </div>
@@ -299,9 +305,14 @@ let userComment=function(){
         <p class="comment commentByUser">
          
         </p>
+        <textarea class="smallForUpdate"  placeholder="Add a comment…"></textarea>
       </div>
+      
     </div>
     <div class="reply1">
+    <div class="none">
+    <button>UPDATE</button>
+        </div>
     <div class="delete-svg">
     <svg class="delete" width="12" height="14" xmlns="http://www.w3.org/2000/svg"><path d="M1.167 12.448c0 .854.7 1.552 1.555 1.552h6.222c.856 0 1.556-.698 1.556-1.552V3.5H1.167v8.948Zm10.5-11.281H8.75L7.773 0h-3.88l-.976 1.167H0v1.166h11.667V1.167Z" fill="#ED6368"/></svg>
     <h4 class="deleteText">Delete</h4>
@@ -328,6 +339,51 @@ let myComent = function () {
 };
 
 container.innerHTML += myComent();
+
+
+
+
+let deleteSvg=document.querySelectorAll(".delete-svg");
+console.log(deleteSvg)
+for(let y=0;y<deleteSvg.length;y++){
+  deleteSvg[y].addEventListener("click",()=>{
+    deleteSvg[y].parentElement.parentElement.parentElement.remove()
+  })
+ }
+ let editSvg=document.querySelectorAll(".edit-svg");
+ console.log(editSvg);
+ for(let u=0;u<deleteSvg.length;u++){
+ editSvg[u].addEventListener("click",()=>{
+   editSvg[u].style.display="none";
+   deleteSvg[u].style.display="none"
+
+   let none=editSvg[u].parentElement.parentElement.children[2].children[0];
+   none.style.display="block";
+   none.parentElement.previousElementSibling.children[1].children[1].style.display="block"
+   none.parentElement.previousElementSibling.children[1].children[1].value=none.parentElement.previousElementSibling.children[1].children[0].innerHTML;
+   none.parentElement.previousElementSibling.children[1].children[0].style.display="none"
+  none.addEventListener("click",()=>{
+    if(none.parentElement.previousElementSibling.children[1].children[1].value!==""){
+      none.parentElement.previousElementSibling.children[1].children[0].style.display="block";
+      none.parentElement.previousElementSibling.children[1].children[0].textContent=none.parentElement.previousElementSibling.children[1].children[1].value;
+      none.parentElement.previousElementSibling.children[1].children[1].style.display="none";
+      editSvg[u].style.display="flex";
+   deleteSvg[u].style.display="flex";
+   none.style.display="none";
+
+    }
+  })
+
+  })
+ }
+ 
+
+
+
+
+
+
+
 
 let textArea = document.querySelector("textarea");
 let button=document.querySelector("button");
@@ -400,11 +456,15 @@ let reply=function(){
       </div>
       <div class="text">
         <p class="comment commentByUser1">
-         
+        
         </p>
+        <textarea class="smallForUpdate"  placeholder="Add a comment…"></textarea>
       </div>
     </div>
     <div class="reply1">
+    <div class="none">
+        <button>UPDATE</button>
+            </div>
     <div class="delete-svg">
     <svg class="delete" width="12" height="14" xmlns="http://www.w3.org/2000/svg"><path d="M1.167 12.448c0 .854.7 1.552 1.555 1.552h6.222c.856 0 1.556-.698 1.556-1.552V3.5H1.167v8.948Zm10.5-11.281H8.75L7.773 0h-3.88l-.976 1.167H0v1.166h11.667V1.167Z" fill="#ED6368"/></svg>
     <h4 class="deleteText">Delete</h4>
@@ -420,14 +480,16 @@ let reply=function(){
 </div>`
 return replyOnReply;
 }
+let editFunction=function(){
+  let edit=`<div class="user">
+  <img class="user-img" src="./images/avatars/image-juliusomo.png" />
+  <textarea onchange="changeFunction(event)" placeholder="Add a comment…"></textarea>
+  <button  onclick="clickFunction(event)">REPLY</button>
+</div>`
+return edit;
+}
 
-let deleteSvg=document.querySelectorAll(".delete-svg");
-console.log(deleteSvg)
-for(let y=0;y<deleteSvg.length;y++){
-  deleteSvg[y].addEventListener("click",()=>{
-    deleteSvg[y].parentElement.parentElement.parentElement.remove()
-  })
- }
+
 
 let divReply=document.querySelector(".reply-div");
 console.log(divReply)
@@ -464,6 +526,32 @@ for(let r=0;r<replyBtn.length;r++){
            for(let y=0;y<deleteSvg.length;y++){
             deleteSvg[y].addEventListener("click",()=>{
               deleteSvg[y].parentElement.parentElement.parentElement.remove()
+            })
+           }
+           let editSvg=document.querySelectorAll(".edit-svg");
+           console.log(editSvg);
+           for(let u=0;u<deleteSvg.length;u++){
+           editSvg[u].addEventListener("click",()=>{
+             editSvg[u].style.display="none";
+             deleteSvg[u].style.display="none"
+          
+             let none=editSvg[u].parentElement.parentElement.children[2].children[0];
+             none.style.display="block";
+             none.parentElement.previousElementSibling.children[1].children[1].style.display="block"
+             none.parentElement.previousElementSibling.children[1].children[1].value=none.parentElement.previousElementSibling.children[1].children[0].innerHTML;
+             none.parentElement.previousElementSibling.children[1].children[0].style.display="none"
+            none.addEventListener("click",()=>{
+              if(none.parentElement.previousElementSibling.children[1].children[1].value!==""){
+                none.parentElement.previousElementSibling.children[1].children[0].style.display="block";
+                none.parentElement.previousElementSibling.children[1].children[0].textContent=none.parentElement.previousElementSibling.children[1].children[1].value;
+                none.parentElement.previousElementSibling.children[1].children[1].style.display="none";
+                editSvg[u].style.display="flex";
+             deleteSvg[u].style.display="flex";
+             none.style.display="none";
+          
+              }
+            })
+          
             })
            }
               
@@ -517,6 +605,33 @@ for(let r=0;r<replyBtn.length;r++){
                   deleteSvg[y].parentElement.parentElement.parentElement.remove()
                 })
                }
+               let editSvg=document.querySelectorAll(".edit-svg");
+               console.log(editSvg);
+               for(let u=0;u<deleteSvg.length;u++){
+               editSvg[u].addEventListener("click",()=>{
+                 editSvg[u].style.display="none";
+                 deleteSvg[u].style.display="none"
+              
+                 let none=editSvg[u].parentElement.parentElement.children[2].children[0];
+                 none.style.display="block";
+                 none.parentElement.previousElementSibling.children[1].children[1].style.display="block"
+                 none.parentElement.previousElementSibling.children[1].children[1].value=none.parentElement.previousElementSibling.children[1].children[0].innerHTML;
+                 none.parentElement.previousElementSibling.children[1].children[0].style.display="none"
+                none.addEventListener("click",()=>{
+                  if(none.parentElement.previousElementSibling.children[1].children[1].value!==""){
+                    none.parentElement.previousElementSibling.children[1].children[0].style.display="block";
+                    none.parentElement.previousElementSibling.children[1].children[0].textContent=none.parentElement.previousElementSibling.children[1].children[1].value;
+                    none.parentElement.previousElementSibling.children[1].children[1].style.display="none";
+                    editSvg[u].style.display="flex";
+                 deleteSvg[u].style.display="flex";
+                 none.style.display="none";
+              
+                  }
+                })
+              
+                })
+               }
+               
              
              
 
@@ -562,8 +677,36 @@ for(let r=0;r<replyBtn.length;r++){
               deleteSvg[y].parentElement.parentElement.parentElement.remove()
             })
            }
+           let editSvg=document.querySelectorAll(".edit-svg");
+ console.log(editSvg);
+ for(let u=0;u<deleteSvg.length;u++){
+ editSvg[u].addEventListener("click",()=>{
+   editSvg[u].style.display="none";
+   deleteSvg[u].style.display="none"
+
+   let none=editSvg[u].parentElement.parentElement.children[2].children[0];
+   none.style.display="block";
+   none.parentElement.previousElementSibling.children[1].children[1].style.display="block"
+   none.parentElement.previousElementSibling.children[1].children[1].value=none.parentElement.previousElementSibling.children[1].children[0].innerHTML;
+   none.parentElement.previousElementSibling.children[1].children[0].style.display="none"
+  none.addEventListener("click",()=>{
+    if(none.parentElement.previousElementSibling.children[1].children[1].value!==""){
+      none.parentElement.previousElementSibling.children[1].children[0].style.display="block";
+      none.parentElement.previousElementSibling.children[1].children[0].textContent=none.parentElement.previousElementSibling.children[1].children[1].value;
+      none.parentElement.previousElementSibling.children[1].children[1].style.display="none";
+      editSvg[u].style.display="flex";
+   deleteSvg[u].style.display="flex";
+   none.style.display="none";
+
+    }
+  })
+
+  })
+ }
         }
+        
       })
+
      
     }
    
@@ -601,6 +744,32 @@ window.clickFunction=()=>{
     deleteSvg[y].parentElement.parentElement.parentElement.remove()
   })
  }
+ let editSvg=document.querySelectorAll(".edit-svg");
+ console.log(editSvg);
+ for(let u=0;u<deleteSvg.length;u++){
+ editSvg[u].addEventListener("click",()=>{
+   editSvg[u].style.display="none";
+   deleteSvg[u].style.display="none"
+
+   let none=editSvg[u].parentElement.parentElement.children[2].children[0];
+   none.style.display="block";
+   none.parentElement.previousElementSibling.children[1].children[1].style.display="block"
+   none.parentElement.previousElementSibling.children[1].children[1].value=none.parentElement.previousElementSibling.children[1].children[0].innerHTML;
+   none.parentElement.previousElementSibling.children[1].children[0].style.display="none"
+  none.addEventListener("click",()=>{
+    if(none.parentElement.previousElementSibling.children[1].children[1].value!==""){
+      none.parentElement.previousElementSibling.children[1].children[0].style.display="block";
+      none.parentElement.previousElementSibling.children[1].children[0].textContent=none.parentElement.previousElementSibling.children[1].children[1].value;
+      none.parentElement.previousElementSibling.children[1].children[1].style.display="none";
+      editSvg[u].style.display="flex";
+   deleteSvg[u].style.display="flex";
+   none.style.display="none";
+
+    }
+  })
+
+  })
+ }
    
   
  
@@ -618,157 +787,6 @@ window.changeFunction=(event)=>{
 }
 
 
-
-
-/*for(let z=0;z<comments[i].replies.length;z++)
-     {
-      boxAndReply.appendChild(reply_div);
-      
-      reply_div.innerHTML+=templeteFunction();
-      
-     
-      
-     
-    }
-*/
-
-/*<div class="box">
-        <div class="insideBox">
-          <div class="count">
-            <svg
-              class="plus"
-              width="11"
-              height="11"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M6.33 10.896c.137 0 .255-.05.354-.149.1-.1.149-.217.149-.354V7.004h3.315c.136 0 .254-.05.354-.149.099-.1.148-.217.148-.354V5.272a.483.483 0 0 0-.148-.354.483.483 0 0 0-.354-.149H6.833V1.4a.483.483 0 0 0-.149-.354.483.483 0 0 0-.354-.149H4.915a.483.483 0 0 0-.354.149c-.1.1-.149.217-.149.354v3.37H1.08a.483.483 0 0 0-.354.15c-.1.099-.149.217-.149.353v1.23c0 .136.05.254.149.353.1.1.217.149.354.149h3.333v3.39c0 .136.05.254.15.353.098.1.216.149.353.149H6.33Z"
-                fill="#C5C6EF"
-              />
-            </svg>
-            <h2>12</h2>
-            <svg
-              class="minus"
-              width="11"
-              height="3"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M9.256 2.66c.204 0 .38-.056.53-.167.148-.11.222-.243.222-.396V.722c0-.152-.074-.284-.223-.395a.859.859 0 0 0-.53-.167H.76a.859.859 0 0 0-.53.167C.083.437.009.57.009.722v1.375c0 .153.074.285.223.396a.859.859 0 0 0 .53.167h8.495Z"
-                fill="#C5C6EF"
-              />
-            </svg>
-          </div>
-
-          <div class="profile">
-            <div class="insideBox-2">
-              <div class="info">
-                <img class="img" src="./images/avatars/image-amyrobson.png" />
-                <h3>amyrobson</h3>
-                <p class="month">1 month ago</p>
-              </div>
-            </div>
-            <div class="text">
-              <p class="comment">
-                Impressive! Though it seems the drag feature could be improved.
-                But overall it looks incredible. You’ve nailed the design and
-                the responsiveness at various breakpoints works really well.
-              </p>
-            </div>
-          </div>
-          <div class="reply">
-            <svg
-              class="reply-img"
-              width="14"
-              height="13"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M.227 4.316 5.04.16a.657.657 0 0 1 1.085.497v2.189c4.392.05 7.875.93 7.875 5.093 0 1.68-1.082 3.344-2.279 4.214-.373.272-.905-.07-.767-.51 1.24-3.964-.588-5.017-4.829-5.078v2.404c0 .566-.664.86-1.085.496L.227 5.31a.657.657 0 0 1 0-.993Z"
-                fill="#5357B6"
-              />
-            </svg>
-            <h4>Reply</h4>
-          </div>
-        </div>
-      </div>
-      */
-
-/*
-      <div class="reply-div">
-      <div class="reply-box">
-      <div class="insideBox">
-        <div class="count">
-          <svg
-            class="plus"
-            width="11"
-            height="11"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M6.33 10.896c.137 0 .255-.05.354-.149.1-.1.149-.217.149-.354V7.004h3.315c.136 0 .254-.05.354-.149.099-.1.148-.217.148-.354V5.272a.483.483 0 0 0-.148-.354.483.483 0 0 0-.354-.149H6.833V1.4a.483.483 0 0 0-.149-.354.483.483 0 0 0-.354-.149H4.915a.483.483 0 0 0-.354.149c-.1.1-.149.217-.149.354v3.37H1.08a.483.483 0 0 0-.354.15c-.1.099-.149.217-.149.353v1.23c0 .136.05.254.149.353.1.1.217.149.354.149h3.333v3.39c0 .136.05.254.15.353.098.1.216.149.353.149H6.33Z"
-              fill="#C5C6EF"
-            />
-          </svg>
-          <h2>12</h2>
-          <svg
-            class="minus"
-            width="11"
-            height="3"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M9.256 2.66c.204 0 .38-.056.53-.167.148-.11.222-.243.222-.396V.722c0-.152-.074-.284-.223-.395a.859.859 0 0 0-.53-.167H.76a.859.859 0 0 0-.53.167C.083.437.009.57.009.722v1.375c0 .153.074.285.223.396a.859.859 0 0 0 .53.167h8.495Z"
-              fill="#C5C6EF"
-            />
-          </svg>
-        </div>
-
-        <div class="profile">
-          <div class="insideBox-2">
-            <div class="info">
-              <img class="img" src="./images/avatars/image-amyrobson.png" />
-              <h3>amyrobson</h3>
-              <p class="month">1 month ago</p>
-            </div>
-          </div>
-          <div class="text">
-            <p class="comment">
-              Impressive! Though it seems the drag feature could be improved.
-              But overall it looks incredible. You’ve nailed the design and
-              the responsiveness at various breakpoints works really well.
-            </p>
-          </div>
-        </div>
-        <div class="reply">
-          <svg
-            class="reply-img"
-            width="14"
-            height="13"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M.227 4.316 5.04.16a.657.657 0 0 1 1.085.497v2.189c4.392.05 7.875.93 7.875 5.093 0 1.68-1.082 3.344-2.279 4.214-.373.272-.905-.07-.767-.51 1.24-3.964-.588-5.017-4.829-5.078v2.404c0 .566-.664.86-1.085.496L.227 5.31a.657.657 0 0 1 0-.993Z"
-              fill="#5357B6"
-            />
-          </svg>
-          <h4>Reply</h4>
-        </div>
-      
-    </div>
-  </div>
-    </div>
-    */
-
-/*
-    <div class="user">
-        <img class="user-img" src="./images/avatars/image-juliusomo.png" />
-        <textarea placeholder="Add a comment…"></textarea>
-        <button>SEND</button>
-      </div>
-
-      */
-     
 
 
 
