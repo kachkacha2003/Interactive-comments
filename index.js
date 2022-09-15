@@ -539,6 +539,7 @@ for(let r=0;r<replyBtn.length;r++){
              none.style.display="block";
              none.parentElement.previousElementSibling.children[1].children[1].style.display="block"
              none.parentElement.previousElementSibling.children[1].children[1].value=none.parentElement.previousElementSibling.children[1].children[0].innerHTML;
+             none.parentElement.previousElementSibling.children[1].children[1].focus()
              none.parentElement.previousElementSibling.children[1].children[0].style.display="none"
             none.addEventListener("click",()=>{
               if(none.parentElement.previousElementSibling.children[1].children[1].value!==""){
@@ -616,6 +617,7 @@ for(let r=0;r<replyBtn.length;r++){
                  none.style.display="block";
                  none.parentElement.previousElementSibling.children[1].children[1].style.display="block"
                  none.parentElement.previousElementSibling.children[1].children[1].value=none.parentElement.previousElementSibling.children[1].children[0].innerHTML;
+                 none.parentElement.previousElementSibling.children[1].children[1].focus()
                  none.parentElement.previousElementSibling.children[1].children[0].style.display="none"
                 none.addEventListener("click",()=>{
                   if(none.parentElement.previousElementSibling.children[1].children[1].value!==""){
@@ -688,6 +690,7 @@ for(let r=0;r<replyBtn.length;r++){
    none.style.display="block";
    none.parentElement.previousElementSibling.children[1].children[1].style.display="block"
    none.parentElement.previousElementSibling.children[1].children[1].value=none.parentElement.previousElementSibling.children[1].children[0].innerHTML;
+   none.parentElement.previousElementSibling.children[1].children[1].focus()
    none.parentElement.previousElementSibling.children[1].children[0].style.display="none"
   none.addEventListener("click",()=>{
     if(none.parentElement.previousElementSibling.children[1].children[1].value!==""){
@@ -755,11 +758,13 @@ window.clickFunction=()=>{
    none.style.display="block";
    none.parentElement.previousElementSibling.children[1].children[1].style.display="block"
    none.parentElement.previousElementSibling.children[1].children[1].value=none.parentElement.previousElementSibling.children[1].children[0].innerHTML;
+   none.parentElement.previousElementSibling.children[1].children[1].focus()
    none.parentElement.previousElementSibling.children[1].children[0].style.display="none"
   none.addEventListener("click",()=>{
     if(none.parentElement.previousElementSibling.children[1].children[1].value!==""){
       none.parentElement.previousElementSibling.children[1].children[0].style.display="block";
       none.parentElement.previousElementSibling.children[1].children[0].textContent=none.parentElement.previousElementSibling.children[1].children[1].value;
+
       none.parentElement.previousElementSibling.children[1].children[1].style.display="none";
       editSvg[u].style.display="flex";
    deleteSvg[u].style.display="flex";
